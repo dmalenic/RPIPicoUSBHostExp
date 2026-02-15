@@ -27,10 +27,10 @@
 #include "tusb.h"
 #include "bsp/board_api.h"
 
-size_t get_console_inputs(uint8_t* buf, size_t bufsize) {
+size_t get_console_inputs(uint8_t* buf, const size_t bufsize) {
   size_t count = 0;
   while (count < bufsize) {
-    int ch = board_getchar();
+    const int ch = board_getchar();
     if (ch <= 0) break;
 
     buf[count] = (uint8_t) ch;
@@ -44,7 +44,7 @@ void cdc_app_task(void) {
   uint8_t buf[64 + 1]; // +1 for extra null character
   uint32_t const bufsize = sizeof(buf) - 1;
 
-  uint32_t count = get_console_inputs(buf, bufsize);
+  const uint32_t count = get_console_inputs(buf, bufsize);
   buf[count] = 0;
 
   // loop over all mounted interfaces
@@ -76,8 +76,8 @@ void tuh_cdc_rx_cb(uint8_t idx) {
 }
 
 // Invoked when a device with CDC interface is mounted
-// idx is index of cdc interface in the internal pool.
-void tuh_cdc_mount_cb(uint8_t idx) {
+// idx is an index of cdc interface in the internal pool.
+void tuh_cdc_mount_cb(const uint8_t idx) {
   tuh_itf_info_t itf_info = {0};
   tuh_cdc_itf_get_info(idx, &itf_info);
 
@@ -86,7 +86,7 @@ void tuh_cdc_mount_cb(uint8_t idx) {
 
 #ifdef CFG_TUH_CDC_LINE_CODING_ON_ENUM
   // If CFG_TUH_CDC_LINE_CODING_ON_ENUM is defined, line coding will be set by tinyusb stack
-  // while eneumerating new cdc device
+  // while listing a new cdc device
   cdc_line_coding_t line_coding = {0};
   if (tuh_cdc_get_local_line_coding(idx, &line_coding)) {
     printf("  Baudrate: %" PRIu32 ", Stop Bits : %u\r\n", line_coding.bit_rate, line_coding.stop_bits);

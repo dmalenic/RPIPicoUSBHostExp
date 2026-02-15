@@ -30,6 +30,7 @@
 #include "bsp/board_api.h"
 #include "tusb.h"
 #include "pico/status_led.h"
+#include "pico/stdio.h"
 
 //--------------------------------------------------------------------+
 // MACRO CONSTANT TYPEDEF PROTYPES
@@ -39,15 +40,16 @@ extern void cdc_app_task(void);
 extern void cdc_write(const uint8_t* buf, size_t len);
 
 /*------------- MAIN -------------*/
+__attribute__((noreturn))
 int main(void) {
- 	bool rc = status_led_init();
-    hard_assert(rc);
+ 	const bool rc = status_led_init();
+  hard_assert(rc);
   stdio_init_all ();
   board_init();
 
   printf("TinyUSB Host CDC Example\r\n");
 
-  // init host stack on configured roothub port
+  // init host stack on configured root-hub port
   tuh_init(BOARD_TUH_RHPORT);
 
   if (board_init_after_tusb) {
@@ -94,7 +96,7 @@ void led_blinking_task(void) {
   //board_led_write(led_state);
   status_led_set_state(led_state);
   if (led_state){
-	   cdc_write("ON",3);
+	   cdc_write((const uint8_t*)"ON",3);
   }
   led_state = 1 - led_state; // toggle
 

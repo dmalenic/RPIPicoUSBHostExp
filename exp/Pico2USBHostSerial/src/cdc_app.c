@@ -68,20 +68,20 @@ void cdc_app_task(void) {
 //--------------------------------------------------------------------+
 
 // Invoked when received new data
-void tuh_cdc_rx_cb(uint8_t idx) {
+void tuh_cdc_rx_cb(const uint8_t idx) {
   uint8_t buf[64 + 1]; // +1 for extra null character
   uint32_t const bufsize = sizeof(buf) - 1;
 
   // forward cdc interfaces -> console
-  uint32_t count = tuh_cdc_read(idx, buf, bufsize);
+  const uint32_t count = tuh_cdc_read(idx, buf, bufsize);
   buf[count] = 0;
 
   printf("%s", (char*) buf);
 }
 
 // Invoked when a device with CDC interface is mounted
-// idx is index of cdc interface in the internal pool.
-void tuh_cdc_mount_cb(uint8_t idx) {
+// idx is an index of cdc interface in the internal pool.
+void tuh_cdc_mount_cb(const uint8_t idx) {
   tuh_itf_info_t itf_info = {0};
   tuh_cdc_itf_get_info(idx, &itf_info);
 
@@ -89,8 +89,8 @@ void tuh_cdc_mount_cb(uint8_t idx) {
          itf_info.desc.bInterfaceNumber);
 
 #ifdef CFG_TUH_CDC_LINE_CODING_ON_ENUM
-  // If CFG_TUH_CDC_LINE_CODING_ON_ENUM is defined, line coding will be set by tinyusb stack
-  // while eneumerating new cdc device
+  // If CFG_TUH_CDC_LINE_CODING_ON_ENUM is defined, line coding will be set by the tinyusb stack
+  // while listing a new cdc device
   cdc_line_coding_t line_coding = {0};
   if (tuh_cdc_get_local_line_coding(idx, &line_coding)) {
     printf("  Baudrate: %" PRIu32 ", Stop Bits : %u\r\n", line_coding.bit_rate, line_coding.stop_bits);

@@ -39,3 +39,20 @@
 
 # debug information files
 *.dwo
+
+# CMake build artifacts
+.idea/
+build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.uf2
+*.elf
+*.hex
+*.bin
+*.dis
+*.map
+*.elf.map
+

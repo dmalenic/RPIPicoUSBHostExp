@@ -23,8 +23,7 @@
  *
  */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "pico/stdio.h"
 #include <string.h>
 
 #include "bsp/board_api.h"
@@ -44,13 +43,14 @@ extern bool tuh_max3421_reg_write(uint8_t rhport, uint8_t reg, uint8_t data, boo
 #endif
 
 /*------------- MAIN -------------*/
+__attribute__((noreturn))
 int main(void) {
   stdio_init_all ();
   board_init();
 
   printf("TinyUSB Host CDC MSC HID Example\r\n");
 
-  // init host stack on configured roothub port
+  // init host stack on configured root-hub port
   tuh_init(BOARD_TUH_RHPORT);
 
   if (board_init_after_tusb) {
