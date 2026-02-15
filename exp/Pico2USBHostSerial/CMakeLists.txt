@@ -1,5 +1,5 @@
 # Module: Pico2USBHostSerial
-set(NAME PicoHost)
+set(NAME Pico2USBHostSerial)
 set(PICO_BOARD pico2_w)
 set(PICO_PLATFORM rp2350)
 

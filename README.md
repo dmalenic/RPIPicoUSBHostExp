@@ -39,8 +39,10 @@ cmake ..
 make
 
 # Or build a specific module
-make PicoHost    # Builds PicoUSBHost or PicoUSBHostSerial
-make PicoFlash   # Builds RP2040ZeroFlashSlave
+make PicoUSBHost         # Builds PicoUSBHost
+make PicoUSBHostSerial   # Builds PicoUSBHostSerial  
+make Pico2USBHostSerial  # Builds Pico2USBHostSerial
+make PicoFlash           # Builds RP2040ZeroFlashSlave
 ```
 
 ### Building from Command Line
