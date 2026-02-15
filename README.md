@@ -6,30 +6,31 @@ Raspberry Pi Pico USB Host Experiments - A collection of USB Host examples for R
 
 This project contains 4 modules/deliverables:
 
-1. **PicoUSBHost** - Full USB Host implementation for RP2040 with HID, MSC, and CDC support
-2. **PicoUSBHostSerial** - USB Host Serial implementation for RP2040
+1. **PicoUSBHost** - Full USB Host implementation for RP2040 with HID, MSC, and CDC support.
+2. **PicoUSBHostSerial** - USB Host Serial implementation for RP2040.
 3. **Pico2USBHostSerial** - USB Host Serial implementation for RP2350 (Pico 2)
-4. **RP2040ZeroFlashSlave** - Flash Slave implementation for Waveshare RP2040 Zero
+4. **RP2040ZeroFlashClient** - Flash Client implementation for Waveshare RP2040 Zero
+5. **Tiny2040FlashClient** - Flash Client implementation for Pimoroni Tiny 2040
 
 ## Building with CLion
 
 ### Prerequisites
 
-1. Install the [Raspberry Pi Pico SDK](https://github.com/raspberrypi/pico-sdk)
-2. Set the `PICO_SDK_PATH` environment variable to point to your Pico SDK installation
-3. Install CMake 3.12 or higher
-4. Install ARM GCC toolchain
+1. Install the [Raspberry Pi Pico SDK](https://github.com/raspberrypi/pico-sdk).
+2. Set the `PICO_SDK_PATH` environment variable to point to your Pico SDK installation.
+3. Install CMake 3.12 or higher.
+4. Install ARM GCC toolchain.
 
 ### Setup in CLion
 
-1. Open the project root directory in CLion
-2. CLion should automatically detect the CMakeLists.txt file
-3. Configure CMake settings if needed (File → Settings → Build, Execution, Deployment → CMake)
-4. Build the project (Build → Build Project) or build individual modules
+1. Open the project root directory in CLion.
+2. CLion should automatically detect the CMakeLists.txt file.
+3. Configure CMake settings if needed (File → Settings → Build, Execution, Deployment → CMake).
+4. Build the project (Build → Build Project) or build individual modules.
 
 ### Building Individual Modules
 
-The project is now structured as a single CMake project with 4 modules. Each module can be built independently:
+The project is now structured as a single CMake project with 5-modules. Each module can be built independently:
 
 ```bash
 # Build all modules
@@ -39,10 +40,11 @@ cmake ..
 make
 
 # Or build a specific module
-make PicoUSBHost         # Builds PicoUSBHost
-make PicoUSBHostSerial   # Builds PicoUSBHostSerial  
-make Pico2USBHostSerial  # Builds Pico2USBHostSerial
-make PicoFlash           # Builds RP2040ZeroFlashSlave
+make PicoUSBHost           # Builds PicoUSBHost
+make PicoUSBHostSerial     # Builds PicoUSBHostSerial  
+make Pico2USBHostSerial    # Builds Pico2USBHostSerial
+make RP2040ZeroFlashClient # Builds RP2040ZeroFlashClient
+make Tiny2040FlashClient   # Builds Tiny2040FlashClient
 ```
 
 ### Building from Command Line
@@ -58,7 +60,8 @@ make -j4
 # - build/exp/PicoUSBHost/src/
 # - build/exp/PicoUSBHostSerial/src/
 # - build/exp/Pico2USBHostSerial/src/
-# - build/exp/RP2040ZeroFlashSlave/src/
+# - build/exp/RP2040ZeroFlashClient/src/
+# - build/exp/Tiny2040FlashClient/src/
 ```
 
 ## Flashing to Device
@@ -88,10 +91,16 @@ make -j4
 - Features: CDC (Serial) support
 - UART: TX on GPIO 16, RX on GPIO 17
 
-### RP2040ZeroFlashSlave
+### RP2040ZeroFlashClient
 
 - Board: Waveshare RP2040 Zero
-- Features: Flash slave operations
+- Features: Flash client operations
+- Requirements: Pico SDK version >= 2.2.0
+
+### Tiny2040FlashClient
+
+- Board: Pimoroni Tiny 2040
+- Features: Flash client operations
 - Requirements: Pico SDK version >= 2.2.0
 
 ## License
