@@ -23,13 +23,10 @@
  *
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 #include "bsp/board_api.h"
 #include "tusb.h"
-#include "pico/status_led.h"
 #include "pico/stdio.h"
 
 //--------------------------------------------------------------------+
@@ -42,8 +39,6 @@ extern void cdc_write(const uint8_t* buf, size_t len);
 /*------------- MAIN -------------*/
 __attribute__((noreturn))
 int main(void) {
- 	const bool rc = status_led_init();
-  hard_assert(rc);
   stdio_init_all ();
   board_init();
 
@@ -93,8 +88,7 @@ void led_blinking_task(void) {
   if (board_millis() - start_ms < interval_ms) return; // not enough time
   start_ms += interval_ms;
 
-  //board_led_write(led_state);
-  status_led_set_state(led_state);
+  board_led_write(led_state);
   if (led_state){
 	   cdc_write((const uint8_t*)"ON",3);
   }

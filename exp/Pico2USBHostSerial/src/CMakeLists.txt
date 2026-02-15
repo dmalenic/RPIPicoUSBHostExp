@@ -15,11 +15,9 @@ target_include_directories(${NAME} PUBLIC
 # In addition to pico_stdlib required for common PicoSDK functionality, add dependency on tinyusb_host
 # for TinyUSB device support and tinyusb_board for the additional board support library used by the example
 target_link_libraries(${NAME} PUBLIC 
-	pico_stdlib 
-	pico_status_led
+	pico_stdlib
 	tinyusb_host 
-	tinyusb_board
-	)
+	tinyusb_board)
 
 pico_add_extra_outputs(${NAME})
 

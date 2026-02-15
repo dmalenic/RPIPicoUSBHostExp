@@ -90,7 +90,7 @@ void led_blinking_task(void) {
 
   board_led_write(led_state);
   if (led_state){
-	   cdc_write((uint8_t*)"ON",3);
+	   cdc_write((const uint8_t*)"ON",3);
   }
   led_state = 1 - led_state; // toggle
 
