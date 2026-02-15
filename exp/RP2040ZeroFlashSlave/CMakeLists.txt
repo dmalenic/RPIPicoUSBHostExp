@@ -2,7 +2,7 @@
 set(NAME PicoFlash)
 set(PICO_BOARD waveshare_rp2040_zero)
 
-# Make Sure version >= 2.2.0
+# Make sure version >= 2.2.0
 if (${PICO_SDK_VERSION_MAJOR} EQUAL 2)
 	if (${PICO_SDK_VERSION_MINOR} LESS 2)
 		message(FATAL_ERROR "Pico SDK Version 2.2.0 required" )
