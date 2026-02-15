@@ -1,5 +1,4 @@
 
-
 add_executable(${NAME})
 
 # Example source
